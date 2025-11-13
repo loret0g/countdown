@@ -1,3 +1,7 @@
+/* ===========================
+   Layout general
+   =========================== */
+
 *,
 *::before,
 *::after {
@@ -27,6 +31,18 @@ body {
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
   padding: 1.75rem 1.5rem 2rem;
+}
+
+/* Header de la tarjeta (título + hora actual) */
+.current-time {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.current-time span {
+  font-weight: 600;
+  color: #111827;
 }
 
 /* ===========================
@@ -128,22 +144,6 @@ body {
 }
 
 /* ===========================
-   Resultado
-   =========================== */
-
-.result-card {
-  margin-top: 1rem;
-  padding: 0.75rem 0.9rem;
-  border-radius: 10px;
-  background: #eff6ff;
-  font-size: 0.9rem;
-}
-
-.result-card p {
-  margin: 0 0 0.25rem 0;
-}
-
-/* ===========================
    Secciones inferiores
    =========================== */
 
@@ -188,14 +188,87 @@ body {
   border: 1px solid #e5e7eb;
   padding: 0.75rem 0.9rem;
   background: #f9fafb;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Borde lateral neutro por defecto */
+.timer-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 4px;
+  background: #e5e7eb;
+  left: 0;
+}
+
+/* Construcción = naranja */
+.timer-section--construccion::before {
+  background: #f97316;
+}
+.timer-section--construccion {
+  background: linear-gradient(
+    90deg,
+    rgba(249, 115, 22, 0.1),
+    #f9fafb
+  );
+}
+
+/* Investigación = morado */
+.timer-section--investigacion::before {
+  background: #8b5cf6;
+}
+.timer-section--investigacion {
+  background: linear-gradient(
+    90deg,
+    rgba(139, 92, 246, 0.1),
+    #f9fafb
+  );
+}
+
+/* Entrenamiento = verde */
+.timer-section--entrenamiento::before {
+  background: #22c55e;
+}
+.timer-section--entrenamiento {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 197, 94, 0.1),
+    #f9fafb
+  );
+}
+
+/* Header dentro de cada sección */
+.timer-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Título de la sección */
 .timer-section-title {
-  margin: 0 0 0.4rem 0;
-  font-size: 0.85rem;
+  margin: 0;
+  font-size: 0.9rem;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #374151;
+  letter-spacing: 0.08em;
+  color: #111827;
+}
+
+/* Iconitos según tipo */
+.timer-section--construccion .timer-section-title::before {
+  content: "🧱";
+  margin-right: 0.35rem;
+}
+
+.timer-section--investigacion .timer-section-title::before {
+  content: "🔬";
+  margin-right: 0.35rem;
+}
+
+.timer-section--entrenamiento .timer-section-title::before {
+  content: "💪";
+  margin-right: 0.35rem;
 }
 
 .timer-section-empty {

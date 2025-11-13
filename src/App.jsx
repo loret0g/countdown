@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./index.css";
 import CountdownForm from "./components/CountdownForm.jsx";
 import TimerSection from "./components/TimerSection.jsx";
@@ -12,13 +11,12 @@ const CATEGORIES = [
 
 function App() {
   const { timers, addTimer, deleteTimer, clearTimers } = useTimers();
-  const [lastResult, setLastResult] = useState(null);
 
   const now = new Date();
 
-  const handleAddTimer = (timer, targetDate) => {
+  const handleAddTimer = (timer /*, targetDate*/) => {
+    // ya no usamos targetDate para mostrar el recuadro
     addTimer(timer);
-    setLastResult(targetDate);
   };
 
   const groupedTimers = CATEGORIES.map((cat) => ({
@@ -32,15 +30,7 @@ function App() {
     <div className="app">
       <div className="card">
 
-
         <CountdownForm onAddTimer={handleAddTimer} />
-
-        {lastResult && (
-          <div className="result-card">
-            <p>Esta cuenta atrás terminará el:</p>
-            <strong>{lastResult.toLocaleString("es-ES")}</strong>
-          </div>
-        )}
 
         <section className="sections-container">
           <div className="sections-header">
@@ -61,6 +51,7 @@ function App() {
                 title={cat.label}
                 timers={cat.timers}
                 onDelete={deleteTimer}
+                variant={cat.key}
               />
             ))}
           </div>

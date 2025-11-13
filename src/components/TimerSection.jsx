@@ -1,7 +1,12 @@
-function TimerSection({ title, timers, onDelete }) {
+function TimerSection({ title, timers, onDelete, variant }) {
+  const sectionClass = `timer-section timer-section--${variant}`;
+
   return (
-    <section className="timer-section">
-      <h3 className="timer-section-title">{title}</h3>
+    <section className={sectionClass}>
+      <div className="timer-section-header">
+        <h3 className="timer-section-title">{title}</h3>
+        {/* 🔥 Quitamos el span con el número de registros */}
+      </div>
 
       {timers.length === 0 ? (
         <p className="timer-section-empty">
